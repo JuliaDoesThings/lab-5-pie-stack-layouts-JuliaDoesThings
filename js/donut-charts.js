@@ -29,7 +29,7 @@ const drawDonutCharts = (data) => {
         sales: yearData[format] });
     });
 
-    formats.forEach(format => console.log(format));
+    //formats.forEach(format => console.log(format)); tested to make sure my own understanding of the format was correct :D
 
     const pieGenerator = d3.pie()
     .value(d => d.sales);
@@ -49,7 +49,42 @@ const drawDonutCharts = (data) => {
     .data(annotatedData)          
     .join("path")                 
       .attr("class", `arc-${year}`)
-      .attr("d", arcGenerator);  
+      .attr("d", arcGenerator)
+      .attr("fill", d => colorScale(d.data.format));            //instructions say to split it. however that breaks it.                              
+      
+
+  //not appearing but I CANNOT figure it out im going insane
+  arcs
+      .append("text")
+        .text(d => {
+          d["percentage"] = (d.endAngle - d.startAngle) / (2 * Math.PI);
+          //console.log(d3.format(".0%")(d.percentage)) debugging: num is being calculated
+          return d3.format(".0%")(d.percentage); 
+        })
+        .attr("x", d => {
+          d["centroid"] = arcGenerator
+            .startAngle(d.startAngle)
+            .endAngle(d.endAngle)
+            .centroid();
+          //console.log(d.centroid[0]) debugging: centroid number makes sense
+          return d.centroid[0];
+        })
+        .attr("y", d => d.centroid[1])
+        .attr("text-anchor", "middle")
+        .attr("dominant-baseline", "middle")
+        .attr("fill", "#f6fafc") //debugging: changing this to black changes nothing 
+        //.attr("fill-opacity", d => d.percentage < 0.05 ? 0 : 1)
+        .style("font-size", "16px")
+        .style("font-weight", 500);
+
+
+  donutContainer
+  .append("text")
+    .text(year)
+    .attr("text-anchor", "middle")
+    .attr("dominant-baseline", "middle")
+    .style("font-size", "24px")
+    .style("font-weight", 500);
   });
-  
+ 
 };
