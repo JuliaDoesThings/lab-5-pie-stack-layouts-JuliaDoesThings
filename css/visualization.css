@@ -1,0 +1,15 @@
+/*file originally not included? made from scratch to be an empty file to allow loading*/
+.tick text 
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/*.x-axis-streamgraph path {
+  stroke-opacity: 0;
+}
+.x-axis-streamgraph text {
+  fill-opacity: 0;
+}
+  */
