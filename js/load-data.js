@@ -5,4 +5,7 @@ d3.csv("./data/data.csv", d3.autoType).then(data => { //same issue as before, st
   drawStackedBars(data);
   drawStreamGraph(data);
   addLegend();
+
+  // console.log(data);
+  // console.log(data.year);
 });

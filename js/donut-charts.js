@@ -47,8 +47,11 @@ const drawDonutCharts = (data) => {
   const arcs = donutContainer
     .selectAll(`.arc-${year}`)  
     .data(annotatedData)          
-    .join("path")                 
+    .join("g")                 
       .attr("class", `arc-${year}`)
+
+  arcs
+    .append("path")
       .attr("d", arcGenerator)
       .attr("fill", d => colorScale(d.data.format));            //instructions say to split it. however that breaks it.                              
       
@@ -73,7 +76,7 @@ const drawDonutCharts = (data) => {
         .attr("text-anchor", "middle")
         .attr("dominant-baseline", "middle")
         .attr("fill", "#f6fafc") //debugging: changing this to black changes nothing 
-        //.attr("fill-opacity", d => d.percentage < 0.05 ? 0 : 1)
+        .attr("fill-opacity", d => d.percentage < 0.05 ? 0 : 1)
         .style("font-size", "16px")
         .style("font-weight", 500);
 
