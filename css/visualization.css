@@ -6,6 +6,11 @@
   font-weight: 500;
 }
 
+.donut-container-Comedy 
+{
+  margin-left: 100px;
+}
+
 /*.x-axis-streamgraph path {
   stroke-opacity: 0;
 }
